@@ -18,9 +18,7 @@ contract FlashLoanReceiverBase is IFlashLoanReceiver {
     }
 
     function transferFundsBackToPoolInternal(address _reserve, uint _amount) internal {
-
         address payable core = addressesProvider.getLendingPoolCore();
-
         transferInternal(core,_reserve, _amount);
     }
 
