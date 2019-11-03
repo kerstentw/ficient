@@ -7,7 +7,6 @@ import "openzeppelin-solidity/contracts/token/ERC20/ERC20Detailed.sol";
 import "../configuration/LendingPoolAddressesProvider.sol";
 import "../lendingpool/LendingPool.sol";
 import "../lendingpool/LendingPoolDataProvider.sol";
-import "../lendingpool/LendingPoolCore.sol";
 import "../libraries/WadRayMath.sol";
 
 /**

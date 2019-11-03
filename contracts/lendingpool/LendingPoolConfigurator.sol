@@ -1,7 +1,7 @@
 pragma solidity ^0.5.0;
 
 import "openzeppelin-contracts/contracts/ownership/Ownable.sol";
-import "openzeppelin-contracts/contracts/math/SafeMath.sol";
+import "../SafeMath.sol";
 import "openzeppelin-contracts/contracts/token/ERC20/ERC20Detailed.sol";
 import "../libraries/CoreLibrary.sol";
 import "../configuration/LendingPoolAddressesProvider.sol";

@@ -2,7 +2,6 @@ pragma solidity^0.5.0;
 
 import "./IArbRail.sol";
 import "./SafeMath.sol";
-import "./flashloan/base/FlashLoanReceiverBase.sol";
 import "./flashloan/interfaces/IFlashLoanReceiver.sol";
 
 /*
@@ -32,7 +31,7 @@ contract Factory {
 	address daiAddress = "0x89d24a6b4ccb1b6faa2625fe562bdd9a23260359";
 	event constructed(string created);
 
-    constructor() {
+    constructor() internal {
 		emit constructed("Fuck");
 	}
 	
@@ -58,7 +57,7 @@ contract Ficient is FlashLoanReceiverBase {
 	
   event loanCalled(string called);
 
-  constructor(address[] circuit, uint256 amount) {
+  constructor(address[] circuit, uint256 amount) internal {
 	circuitToExecute = circuit;
   }
 

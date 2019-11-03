@@ -1,6 +1,6 @@
 pragma solidity ^0.5.0;
 
-import "openzeppelin-contracts/contracts/math/SafeMath.sol";
+import "../../SafeMath.sol";
 import "openzeppelin-contracts/contracts/token/ERC20/IERC20.sol";
 import "openzeppelin-contracts/contracts/token/ERC20/SafeERC20.sol";
 import "../interfaces/IFlashLoanReceiver.sol";
