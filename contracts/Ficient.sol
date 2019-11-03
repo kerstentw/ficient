@@ -27,42 +27,47 @@ interface ILendingPool {
   function getReserves () external view returns ( address[] );
 }
 
+contract Factory {
+	/// Hardcode more addresses here
+	address daiAddress = "0x89d24a6b4ccb1b6faa2625fe562bdd9a23260359";
+    constructor() {
+		event("Fuck")
+	}
+	
+	// Function to called by webjs
+	function setCircuit(address[] upgradeCircuit, uint256, amount) external return (bool didSucceed) {
+		// Call flash loan, uses dai as base lending address provider
+		LendingPoolAddressesProvider provider = LendingPoolAddressesProvider("0x8Ac14CE57A87A07A2F13c1797EfEEE8C0F8F571A");
+		LendingPool lendingPool = LendingPool(provider.getLendingPool());
+
+		// Create child contract
+		Ficient loanContract = new Ficient(upgradeCircuit);
+		address ficientAddress = address(loanContract);
+
+		/// flashLoan method call 
+		lendingPool.flashLoan(ficientAddress, daiAddress, amount);
+		return true;
+	}
+}
+
 contract Ficient is FlashLoanReceiverBase {
-  //using SafeMath for uint256;
-
   unint256 feePercent;
-  address lending_pool_addr = 0xB36017F5aafDE1a9462959f0e53866433D373404;
-  ILendingPool LendingPool = ILendingPool(lending_pool_addr);
+  address[] circuitToExecute;
 
-  // []
-  mapping (address => address) mounted_rails;
-
-  constructor (address _iflash_contract) public external {
-
+  constructor(address[] circuit, uint256 amount) {
+	circuitToExecute = circuit;
   }
-
-  function MountRail(address _token_addr, address _rail_addr) {
-    mounted_rails[_token_addr] = _rail_addr;
-  }
-
 
   function executeOperation(address _reserve, uint256 _amount, uint256 _fee) external returns (uint256 returnedAmount) {
-
     require(_amount <= getBalanceInternal(address(this), _reserve),
     "Invalid balance for the contract");
 
-    /*
-      This is where the Rails Logic goes
-
-      IRails new Rails(mounted_rails[reserve])
-    */
-
-    transferFundsBackToPoolInternal();
-
-    return _remainging
+	// Execute trades
+	
+	
+	transferFundsBackToPoolInternal(_reserve, _amount.add(_fee));
+	return _amount.add(_fee);
   }
-
-
 
   function () payable external {
     revert();
