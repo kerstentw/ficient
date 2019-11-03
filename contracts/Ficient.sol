@@ -26,17 +26,17 @@ interface ILendingPool {
 
 contract Factory {
 	/// Hardcode more addresses here
-	address daiAddress = 0x89d24A6b4CcB1B6fAA2625fE562bDD9a23260359;
+	address daiAddress = 0xFf795577d9AC8bD7D90Ee22b6C1703490b6512FD;
 	event lendingPoolCalled(string eventCalled);
 	
 	// Function to called by webjs
-	function setCircuit(address[] calldata upgradeCircuit, uint256 amount) external returns (bool didSucceed) {
+	function setCircuit(uint256 amount) external returns (bool didSucceed) {
 		// Call flash loan, uses dai as base lending address provider
-		LendingPoolAddressesProvider provider = LendingPoolAddressesProvider(0x8Ac14CE57A87A07A2F13c1797EfEEE8C0F8F571A);
+		LendingPoolAddressesProvider provider = LendingPoolAddressesProvider(0x9C6C63aA0cD4557d7aE6D9306C06C093A2e35408);
 		ILendingPool lendingPool = ILendingPool(provider.getLendingPool());
 
 		// Create child contract
-		Ficient loanContract = new Ficient(upgradeCircuit, amount);
+		Ficient loanContract = new Ficient(amount);
 		address ficientAddress = address(loanContract);
 
 		/// flashLoan method call 
@@ -52,20 +52,16 @@ contract Ficient is IFlashLoanReceiver {
   address[] circuitToExecute;
   event loanCalled(string called);
 
-  constructor(address[] memory circuit, uint256 amount) public {
-	circuitToExecute = circuit;
+  constructor(uint256 amount) public {
+	feePercent = amount;
   }
 
   function executeOperation(address _reserve, uint256 _amount, uint256 _fee) external returns (uint256 returnedAmount) {
 	// Execute trades
 	emit loanCalled("Flash loan executed.");
 	
- 	IERC20(0x89d24A6b4CcB1B6fAA2625fE562bDD9a23260359).transfer(0x8Ac14CE57A87A07A2F13c1797EfEEE8C0F8F571A, _amount);
-	// transferFundsBackToPoolInternal(0x8Ac14CE57A87A07A2F13c1797EfEEE8C0F8F571A, amount.add(1));
+	// Transfer reserve (aDai), recipient is lending pool core.
+ 	IERC20(0xFf795577d9AC8bD7D90Ee22b6C1703490b6512FD).transfer(0xAf4Ef1a755F05DD9D68E9e53F111eb63b05fB1FD, _amount.add(_fee));
 	return _amount.add(_fee);
-  }
-
-  function () payable external {
-    revert();
   }
 }
