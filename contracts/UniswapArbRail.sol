@@ -1,7 +1,7 @@
 pragma solidity^0.5.0;
 
 import "ArbRailInterface.sol";
-import "./lib/IUniswapExchange.sol";
+import "./IUniswapExchange.sol";
 
 contract UniswapArbRail is ArbRailInterface {
   IUniswapFactory uniswapFactory = IUniswapFactory;

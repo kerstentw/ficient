@@ -1,7 +1,7 @@
-pragma solidity ^0.4.18;
+pragma solidity ^0.5.8;
 
 import "./IArbRail.sol";
-import "http://github.com/KyberNetwork/smart-contracts/blob/master/contracts/KyberNetworkProxy.sol";
+import "./smart-contracts/contracts/KyberNetworkProxy.sol";
 
 
 contract KyberArbRail is IArbRail {

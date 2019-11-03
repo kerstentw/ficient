@@ -1,9 +1,9 @@
 pragma solidity^0.5.0;
 
-import "ArbRail.sol";
-import "./lib/SafeMath.sol";
-import "lib/flashloan/base/FlashLoanReceiverBase.sol";
-import "lib/flashloan/interfaces/IFlashLoanReceiver.sol";
+import "./IArbRail.sol";
+import "./SafeMath.sol";
+import "./flashloan/base/FlashLoanReceiverBase.sol";
+import "./flashloan/interfaces/IFlashLoanReceiver.sol";
 
 /*
   @dev: This is the interface for the Aave LendingPool
@@ -30,12 +30,14 @@ interface ILendingPool {
 contract Factory {
 	/// Hardcode more addresses here
 	address daiAddress = "0x89d24a6b4ccb1b6faa2625fe562bdd9a23260359";
+	event constructed(string created);
+
     constructor() {
-		event("Fuck")
+		emit constructed("Fuck");
 	}
 	
 	// Function to called by webjs
-	function setCircuit(address[] upgradeCircuit, uint256, amount) external return (bool didSucceed) {
+	function setCircuit(address[] upgradeCircuit, uint256, amount) external returns (bool didSucceed) {
 		// Call flash loan, uses dai as base lending address provider
 		LendingPoolAddressesProvider provider = LendingPoolAddressesProvider("0x8Ac14CE57A87A07A2F13c1797EfEEE8C0F8F571A");
 		LendingPool lendingPool = LendingPool(provider.getLendingPool());
