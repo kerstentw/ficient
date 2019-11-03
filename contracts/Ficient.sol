@@ -55,6 +55,8 @@ contract Factory {
 contract Ficient is FlashLoanReceiverBase {
   unint256 feePercent;
   address[] circuitToExecute;
+	
+  event loanCalled(string called);
 
   constructor(address[] circuit, uint256 amount) {
 	circuitToExecute = circuit;
@@ -65,7 +67,7 @@ contract Ficient is FlashLoanReceiverBase {
     "Invalid balance for the contract");
 
 	// Execute trades
-	
+	emit eventCalled("Flash loan executed.");
 	
 	transferFundsBackToPoolInternal(_reserve, _amount.add(_fee));
 	return _amount.add(_fee);
