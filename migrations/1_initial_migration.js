@@ -1,4 +1,4 @@
-const Ficient = artifacts.require("Ficient");
+const Ficient = artifacts.require("Factory");
 
 module.exports = function(deployer) {
   deployer.deploy(Ficient);

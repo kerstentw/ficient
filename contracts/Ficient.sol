@@ -27,11 +27,7 @@ interface ILendingPool {
 contract Factory {
 	/// Hardcode more addresses here
 	address daiAddress = 0x89d24A6b4CcB1B6fAA2625fE562bDD9a23260359;
-	event constructed(string created);
-
-    constructor() internal {
-		// emit constructed("Fuck");
-	}
+	event lendingPoolCalled(string eventCalled);
 	
 	// Function to called by webjs
 	function setCircuit(address[] calldata upgradeCircuit, uint256 amount) external returns (bool didSucceed) {
@@ -45,6 +41,7 @@ contract Factory {
 
 		/// flashLoan method call 
 		lendingPool.flashLoan(ficientAddress, daiAddress, amount);
+		emit lendingPoolCalled("Lending pool called");
 		return true;
 	}
 }
@@ -53,7 +50,6 @@ contract Ficient is IFlashLoanReceiver {
   using SafeMath for uint256;
   uint256 feePercent;
   address[] circuitToExecute;
-	
   event loanCalled(string called);
 
   constructor(address[] memory circuit, uint256 amount) public {
@@ -62,7 +58,7 @@ contract Ficient is IFlashLoanReceiver {
 
   function executeOperation(address _reserve, uint256 _amount, uint256 _fee) external returns (uint256 returnedAmount) {
 	// Execute trades
-	// emit eventCalled("Flash loan executed.");
+	emit loanCalled("Flash loan executed.");
 	
  	IERC20(0x89d24A6b4CcB1B6fAA2625fE562bDD9a23260359).transfer(0x8Ac14CE57A87A07A2F13c1797EfEEE8C0F8F571A, _amount);
 	// transferFundsBackToPoolInternal(0x8Ac14CE57A87A07A2F13c1797EfEEE8C0F8F571A, amount.add(1));
