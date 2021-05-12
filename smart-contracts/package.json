@@ -22,7 +22,7 @@
   "dependencies": {
     "bignumber.js": "^5.0.0",
     "compare-versions": "^3.1.0",
-    "mathjs": "^4.3.0",
+    "mathjs": "^7.5.1",
     "rlp": "^2.0.0",
     "solc": "^0.4.18",
     "solhint": "^1.4.0",
