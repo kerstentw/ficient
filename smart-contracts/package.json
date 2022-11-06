@@ -29,7 +29,7 @@
     "solium": "^1.1.8",
     "truffle": "^4.0.1",
     "truffle-assertions": "^0.7.1",
-    "truffle-flattener": "^1.2.5",
+    "truffle-flattener": "^1.6.0",
     "web3": "^1.0.0-beta.34",
     "yargs": "^11.0.0"
   },
@@ -51,8 +51,8 @@
     "prettier": "^1.15.3",
     "prettier-eslint-cli": "^4.7.1",
     "prettier-standard": "^8.0.1",
-    "solidity-coverage": "0.4.15",
+    "solidity-coverage": "0.8.2",
     "truffle-assertions": "^0.7.2",
-    "truffle-flattener": "^1.2.5"
+    "truffle-flattener": "^1.6.0"
   }
 }
